@@ -22,4 +22,10 @@ Thumbs.db
 # Build files
 dist/
 build/
+<<<<<<< HEAD
 *.log 
+=======
+*.log 
+# Local Netlify folder
+.netlify
+>>>>>>> 16e4b132b6e55c90e59b11f09a05dcfbb5a8ac37
