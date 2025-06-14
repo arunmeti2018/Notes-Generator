@@ -4,7 +4,6 @@
   "description": "AI-Powered Notiq notes generation",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
     "dev": "netlify dev"
   },
   "dependencies": {
