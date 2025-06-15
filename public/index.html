@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI-Powered Placement Prep Hub</title>
+    <title>Notiq Notes Generation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -289,9 +289,10 @@
                 <i data-lucide="moon" class="h-6 w-6"></i>
             </button>
             <div class="hero-gradient rounded-2xl p-8 mb-8 text-white shadow-lg">
-                <h1 class="text-5xl font-bold mb-4 animate-fade-in">AI-Powered Placement Prep Hub</h1>
+                <h1 class="text-5xl font-bold mb-4 animate-fade-in">Notiq Notes Generation</h1>
                 <p class="text-xl text-white/90 max-w-2xl mx-auto">
-                    Generate personalized study notes with AI, track your progress, and ace your placement interviews.
+                    Generate personalized study notes with Notiq, track your progress, and ace your placement
+                    interviews.
                 </p>
                 <div class="mt-6 flex justify-center gap-4">
                     <button
@@ -396,7 +397,7 @@
                             <h2 class="text-lg sm:text-2xl font-bold dark:text-white">Create Study Plan</h2>
                         </div>
                         <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400 mb-4 sm:mb-8">Generate
-                            AI-powered study notes tailored to your needs</p>
+                            Notiq-powered study notes tailored to your needs</p>
 
                         <form id="study-form" class="space-y-4 sm:space-y-6">
                             <div>
@@ -448,7 +449,7 @@
                             <button type="submit" id="generate-btn"
                                 class="w-full bg-blue-600 text-white py-2 sm:py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 transition-colors flex items-center justify-center gap-2 text-sm sm:text-base">
                                 <i data-lucide="sparkles" class="h-5 w-5"></i>
-                                Generate AI Notes
+                                Generate Notiq Notes
                             </button>
                         </form>
 
@@ -517,7 +518,7 @@
                                 class="text-center text-gray-500 dark:text-gray-400 h-64 flex items-center justify-center">
                                 <div class="max-w-sm">
                                     <i data-lucide="file-text" class="h-12 w-12 mx-auto mb-4 text-gray-400"></i>
-                                    <p>Your AI-generated study notes will appear here</p>
+                                    <p>Your Notiq-generated study notes will appear here</p>
                                 </div>
                             </div>
                             <div id="notes-content" class="hidden">
@@ -677,13 +678,13 @@
 
             // Initialize markdown-it
             window.md = window.markdownit({
-                html: true,
+                html: false,
                 linkify: true,
                 typographer: true,
                 highlight: function (str, lang) {
                     if (lang && hljs.getLanguage(lang)) {
                         try {
-                            return hljs.highlight(str, { language: lang }).value;
+                            return hljs.highlight(str, { language: lang, ignoreIllegals: true }).value;
                         } catch (__) { }
                     }
                     return ''; // use external default escaping
@@ -965,7 +966,7 @@
 
                 // Apply syntax highlighting to code blocks
                 document.querySelectorAll('pre code').forEach((block) => {
-                    hljs.highlightBlock(block);
+                    hljs.highlightElement(block);
                 });
 
                 currentNotes = notes;
@@ -981,7 +982,7 @@
                 document.getElementById('empty-state').classList.remove('hidden');
             } finally {
                 generateBtn.disabled = false;
-                generateBtn.textContent = 'Generate AI Notes';
+                generateBtn.textContent = 'Generate Notiq Notes';
             }
         }
 
