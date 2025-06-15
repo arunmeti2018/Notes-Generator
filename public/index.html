@@ -281,7 +281,7 @@
 </head>
 
 <body class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 transition-colors duration-300">
-    <div class="container mx-auto max-w-6xl p-4">
+    <div class="container mx-auto p-4">
         <!-- Enhanced Header with Hero Section -->
         <div class="text-center mb-12 relative">
             <button id="darkModeToggle"
@@ -504,6 +504,12 @@
                                     <i data-lucide="download" class="h-4 w-4 mr-1 sm:mr-2"></i>
                                     Export
                                 </button>
+                                <button id="share-btn"
+                                    class="flex items-center px-2 sm:px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-white disabled:opacity-50 transition-colors"
+                                    onclick="shareNotes()" disabled>
+                                    <i data-lucide="share-2" class="h-4 w-4 mr-1 sm:mr-2"></i>
+                                    Share
+                                </button>
                             </div>
                         </div>
 
@@ -685,9 +691,17 @@
                     if (lang && hljs.getLanguage(lang)) {
                         try {
                             return hljs.highlight(str, { language: lang, ignoreIllegals: true }).value;
-                        } catch (__) { }
+                        } catch (__) {
+                            // Fallback to explicit HTML escaping if highlight.js fails
+                            const tempDiv = document.createElement('div');
+                            tempDiv.textContent = str;
+                            return tempDiv.innerHTML;
+                        }
                     }
-                    return ''; // use external default escaping
+                    // If no language or language not found, explicitly HTML escape before returning
+                    const tempDiv = document.createElement('div');
+                    tempDiv.textContent = str;
+                    return tempDiv.innerHTML;
                 }
             });
 
